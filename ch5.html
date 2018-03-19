@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scope(作用域)</title>
+<script
+	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="myCtrl">
+		<h1>{{carname}}</h1>
+
+		<input ng-model="name">
+		<h1>{{greeting}}</h1>
+		<button ng-click='sayHello()'>点我</button>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) { //scope是模型
+			$scope.carname = "Volvo"; //控制器是js与html之前的桥梁，这里初始化了一个变量
+			$scope.sayHello = function() {
+		    	$scope.greeting = 'Hello ' + $scope.name + '!';
+			};
+		});
+	</script>
+</body>
+</html>

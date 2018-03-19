@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表达式</title>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+	<div ng-app=""  ng-init="quantity=1;cost=5;firstName='John';lastName='Doe';points=[1,15,19,2,40]">
+		<p>我的第一个表达式: {{ 5 + 5 }}</p>
+		<p>总价: {{ quantity * cost }}</p>
+		<p>总价: <span ng-bind="quantity * cost"></span></p>
+		<p>姓名: {{ firstName + " " + lastName }}</p>
+		<p>姓名： <span ng-bind="firstName + ' ' + lastName"></span></p>
+		<p>第三个值为 {{ points[2] }}</p>
+<p>		
+1.ng-app是一个特殊的指令，一个HTML文档只出现一次，如出现多次也只有第一个起作用；ng-app可以出现在html文档的任何一个元素上。<br>
+2.ng-app作用：告诉子元素指令是属于angularJs。<br>
+3.ng-app的值可以为空（练习），项目中一定要赋值，后面所说的模块。<br>
+</p>
+	</div>
+</body>
+</html>

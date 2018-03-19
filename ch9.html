@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>服务Service</title>
+<script
+	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+	<p>AngularJS 中你可以创建自己的服务，或使用内建服务</p>
+	<div ng-app="myApp" ng-controller="myCtrl">
+		<p>当前页面的url:</p>
+		<h3>{{myUrl}}</h3>
+
+		<p>欢迎信息:</p>
+		<h1>{{myWelcome}}</h1>
+
+		<p>两秒后显示信息:</p>
+		<h1>{{myHeader}}</h1>
+
+		<p>现在时间是:</p>
+		<h1>{{theTime}}</h1>
+		
+		<p>在过滤器中使用自定义服务:</p>
+		<h1>{{255 | myFormat}}</h1>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $location, $http, $timeout,$interval) {
+			$scope.myUrl = $location.absUrl();
+
+			$http.get("ch8.html").then(function(response) {
+				$scope.myWelcome = response.data;
+			});
+
+			$scope.myHeader = "Hello World!";
+			$timeout(function() {
+				$scope.myHeader = "How are you today?";
+			}, 2000);
+
+			$scope.theTime = new Date().toLocaleTimeString();
+			$interval(function() {
+				$scope.theTime = new Date().toLocaleTimeString();
+			}, 1000);
+		});
+		
+		app.service('hexafy', function() {
+			this.myFunc = function (x) {
+		        return x.toString(16);
+		    }
+		});
+		app.filter('myFormat',['hexafy', function(hexafy) {
+		    return function(x) {
+		        return hexafy.myFunc(x);
+		    };
+		}]);
+		
+	</script>
+</body>
+</html>

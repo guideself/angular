@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>模型</title>
+<script
+	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<style>
+input.ng-invalid {
+	background-color: lightblue;
+}
+</style>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="myCtrl">
+		名字: <input ng-model="name">
+		<h1>你输入了: {{name}}</h1>
+	</div>
+	<form name="myForm" ng-init="myText = 'test@runoob.com'">
+		Email: <input type="email" name="myAddress" ng-model="myText">
+		<span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+		<h1>状态</h1>
+		<p>Valid: {{myForm.myAddress.$valid}} (如果输入的值是合法的则为 true)。</p>
+		<p>Dirty: {{myForm.myAddress.$dirty}} (如果值改变则为 true)。</p>
+		<p>Touched: {{myForm.myAddress.$touched}} (如果通过触屏点击则为 true)。</p>
+
+	</form>
+	<p><code>ng-model</code> 指令根据表单域的状态添加/移除以下类：</p>
+	<ul>
+	<li>ng-empty</li>
+	<li>ng-not-empty</li>
+	<li>ng-touched</li>
+	<li>ng-untouched</li>
+	<li>ng-valid</li>
+	<li>ng-invalid</li>
+	<li>ng-dirty</li>
+	<li>ng-pending</li>
+	<li>ng-pristine</li>
+</ul>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+			$scope.name = "John Doe";
+		});
+	</script>
+</body>
+</html>

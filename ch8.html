@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>过滤器</title>
+<script
+	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+	<ul>
+		<li>currency 格式化数字为货币格式。</li>
+		<li>filter 从数组项中选择一个子集。</li>
+		<li>lowercase 格式化字符串为小写。</li>
+		<li>orderBy 根据某个表达式排列数组。</li>
+		<li>uppercase 格式化字符串为大写。</li>
+	</ul>
+	<div ng-app="myApp" ng-controller="personCtrl">
+		<p>姓名为 {{ lastName | uppercase }}</p>
+		数量: <input type="number" ng-model="quantity"> 价格: <input
+			type="number" ng-model="price">
+		<p>总价 = {{ (quantity * price) | currency }}</p>
+
+		<p>循环对象:</p>
+		<ul>
+			<li ng-repeat="x in names | orderBy:'country'">{{ x.name + ', '
+				+ x.country }}</li>
+		</ul>
+
+		<p>输入过滤:</p>
+		<p>
+			<input type="text" ng-model="test">
+		</p>
+		<ul>
+			<li ng-repeat="x in names | filter:test | orderBy:'country'">{{
+				(x.name | uppercase) + ', ' + x.country }}</li>
+		</ul>
+
+		姓名: {{ msg | reverse }}
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('personCtrl', function($scope) {
+			$scope.lastName = "Doe";
+			$scope.quantity = 1;
+			$scope.price = 9.99;
+
+			$scope.names = [ {
+				name : 'Jani',
+				country : 'Norway'
+			}, {
+				name : 'Hege',
+				country : 'Sweden'
+			}, {
+				name : 'Kai',
+				country : 'Denmark'
+			} ];
+			
+		  	$scope.msg = "Runoob";
+		});
+		
+		//自定义过滤器
+		app.filter('reverse', function() { //可以注入依赖
+		    return function(text) {
+		        return text.split("").reverse().join("");
+		    }
+		});
+	</script>
+</body>
+</html>
